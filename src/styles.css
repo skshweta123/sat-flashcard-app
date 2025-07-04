@@ -1,0 +1,345 @@
+:root {
+  --primary-color: #4A90E2;
+  --secondary-color: #50E3C2;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --dark-text: #343a40;
+  --white-text: #fff;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: var(--light-gray);
+  color: var(--dark-text);
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* --- Header --- */
+.app-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.main-nav button {
+  padding: 8px 12px;
+  border: 1px solid #007bff; /* Blue */
+  border-radius: 5px;
+  background-color: #007bff; /* Blue */
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.main-nav button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.redo-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- Flashcard 3D Flip --- */
+.card-container {
+    width: 100%;
+    max-width: 450px;
+    min-height: 280px;
+    perspective: 1000px;
+    cursor: pointer;
+    margin-bottom: 1rem; /* Add space between card and counter */
+}
+
+.card-counter {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.card-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card-navigation button {
+  padding: 8px 12px;
+  border: 1px solid #6c757d;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  color: #343a40;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.card-navigation button:hover {
+  background-color: #e2e6ea;
+}
+
+.card-container.is-flipped .card {
+  transform: rotateY(180deg);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+.card .front,
+.card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: var(--border-radius);
+}
+
+.card .front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+.card .back h3 {
+    font-weight: 400;
+}
+
+/* --- Action Buttons --- */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.actions button, .listen-btn {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--white-text);
+}
+
+.listen-btn, .right-btn, .wrong-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.right-btn {
+  background-color: #28a745; /* Green */
+}
+
+.right-btn:hover {
+  background-color: #218838;
+}
+
+.wrong-btn {
+  background-color: #dc3545; /* Red */
+}
+
+.wrong-btn:hover {
+  background-color: #c82333;
+}
+
+.listen-btn {
+  background-color: #ffc107; /* Yellow */
+  color: #212529; /* Dark text for contrast */
+}
+
+.listen-btn:hover {
+  background-color: #e0a800;
+  color: #212529;
+}
+
+
+/* --- Quiz --- */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.quiz-options button {
+  padding: 1rem;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  background-color: #fff;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.quiz-options button:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.quiz-options button.correct-answer {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.quiz-options button.wrong-answer {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.quiz-stats-and-nav {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.session-score {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.session-score span:first-child {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.session-score span:last-child {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* --- Form Elements for Fill-in-blank --- */
+form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 450px;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 1rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+form button[type="submit"] {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: var(--white-text);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+form button[type="submit"]:hover {
+    background-color: #3a7bc8; /* Darker blue */
+}
+
+/* Feedback text */
+.feedback {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.correct-feedback {
+    color: var(--success-color);
+}
+.wrong-feedback {
+    color: var(--error-color);
+}
+
+.pronunciation {
+  font-size: 1.2rem;
+  color: #666;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* --- Responsive --- */
+@media (min-width: 600px) {
+  .app-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .main-nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: auto;
+    gap: 1rem;
+  }
+  .main-nav button {
+    width: auto;
+  }
+} 
