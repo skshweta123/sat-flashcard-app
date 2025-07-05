@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Flashcard({ wordData, onAnswer }) {
+function Flashcard({ wordData, onAnswer, onNavigate }) {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
@@ -17,6 +17,11 @@ function Flashcard({ wordData, onAnswer }) {
     onAnswer(correct);
   };
 
+  const handleNavigate = (direction, e) => {
+    e.stopPropagation();
+    onNavigate(direction);
+  };
+
   const speak = (e) => {
     e.stopPropagation();
     const utter = new SpeechSynthesisUtterance(wordData.word);
@@ -27,9 +32,13 @@ function Flashcard({ wordData, onAnswer }) {
     <div className={`card-container ${flipped ? 'is-flipped' : ''}`} onClick={() => setFlipped(!flipped)}>
       <div className="card">
         <div className="front">
-          <h2>{wordData.word}</h2>
-          <p className="pronunciation">{wordData.pronunciationIPA}</p>
-          <p><button className="listen-btn" onClick={speak}>🔊 Listen</button></p>
+          <button className="card-nav-btn prev" onClick={(e) => handleNavigate(-1, e)}>&#8249;</button>
+          <div className="front-content">
+            <h2>{wordData.word}</h2>
+            <p className="pronunciation">{wordData.pronunciationIPA}</p>
+            <p><button className="listen-btn" onClick={speak}>🔊 Listen</button></p>
+          </div>
+          <button className="card-nav-btn next" onClick={(e) => handleNavigate(1, e)}>&#8250;</button>
         </div>
         <div className="back">
           <h3>{wordData.definition}</h3>

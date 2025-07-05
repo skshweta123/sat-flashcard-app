@@ -139,14 +139,13 @@ function App() {
             <Flashcard 
               wordData={currentCard} 
               onAnswer={handleAnswer} 
+              onNavigate={navigateCard}
             />
             {totalCards > 0 && (
               <div className="card-navigation">
-                <button onClick={() => navigateCard(-1)}>Previous</button>
                 <p className="card-counter">
                   {visitedCount}/{totalCards}
                 </p>
-                <button onClick={() => navigateCard(1)}>Next</button>
               </div>
             )}
           </>
